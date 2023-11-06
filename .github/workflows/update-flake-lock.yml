@@ -1,0 +1,24 @@
+name: Update Flake Lock
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # Run daily at midnight UTC
+
+jobs:
+  update-flake-lock:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Update Flake Lock
+        run: |
+          nix flake update --commit-lock-file
+          git config user.name "GitHub Actions"
+          git config user.email "aidangibson310@gmail.com"
+          git add flake.lock
+          git commit -m "Auto-update flake.lock"
+          git push --quiet --set-upstream origin ${{ github.ref }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
