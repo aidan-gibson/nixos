@@ -13,26 +13,26 @@
 
 
 
-  environment.systemPackages = with pkgs; [
-    bat
-    btop
-    croc
-    du-dust 
-    duf 
-    eza
-    fd 
-    file 
-    gh 
-    git 
-    htop 
-    iperf
-    python3
-    ripgrep
-    screen
-    tmate
-    tree 
-    wget 
-  ];
+  # environment.systemPackages = with pkgs; [
+  #   bat
+  #   btop
+  #   croc
+  #   du-dust 
+  #   duf 
+  #   eza
+  #   fd 
+  #   file 
+  #   gh 
+  #   git 
+  #   htop 
+  #   iperf
+  #   python3
+  #   ripgrep
+  #   screen
+  #   tmate
+  #   tree 
+  #   wget 
+  # ];
 
   programs = {
     zsh.enable = true;
