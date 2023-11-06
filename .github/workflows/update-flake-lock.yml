@@ -14,7 +14,7 @@ jobs:
 
       - name: Update Flake Lock
         run: |
-          nix flake update --commit-lock-file
+          nix flake update
           git config user.name "GitHub Actions"
           git config user.email "aidangibson310@gmail.com"
           git add flake.lock
