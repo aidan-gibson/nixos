@@ -11,7 +11,7 @@
       forAllSystems = nixpkgs.lib.genAttrs allSystems;
     in {
       nixosConfigurations = {
-        mySystemName = nixpkgs.lib.nixosSystem {
+        trix = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
             ./configuration.nix
