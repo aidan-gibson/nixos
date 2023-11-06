@@ -11,10 +11,6 @@
       ./hardware-configuration.nix
     ];
 
-
-
-
-
   programs = {
     zsh.enable = true;
   };
@@ -31,7 +27,7 @@
    networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
 
   # Set your time zone.
-  # time.timeZone = "Europe/Amsterdam";
+  time.timeZone = "America/Los_Angeles";
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -59,21 +55,21 @@
   # services.printing.enable = true;
 
   # Enable sound.
-  # sound.enable = true;
-  # hardware.pulseaudio.enable = true;
+  sound.enable = true;
+  hardware.pulseaudio.enable = true;
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  # users.users.alice = {
-  #   isNormalUser = true;
-  #   extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
-  #   packages = with pkgs; [
-  #     firefox
-  #     tree
-  #   ];
-  # };
+  users.users.nix = {
+    isNormalUser = true;
+    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINphP8B6EmUr/ZKuj0k2XH3WERn2G4kBBkYvGpdB9m5x"
+  ];
+    shell = pkgs.zsh;
+  };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -98,6 +94,11 @@
     wget
     micro
     git
+    aria
+    usbutils
+    inetutils
+    ookla-speedtest
+    neofetch
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -120,14 +121,7 @@
 
 nix.settings.trusted-users = [ "@wheel" ];
 
-users.users.nix = {
-	isNormalUser = true;
-	extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
-	openssh.authorizedKeys.keys = [
-		"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINphP8B6EmUr/ZKuj0k2XH3WERn2G4kBBkYvGpdB9m5x"
-];
-  shell = pkgs.zsh;
-};
+
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
