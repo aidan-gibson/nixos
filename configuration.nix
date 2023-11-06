@@ -175,10 +175,12 @@ nix.settings = {
 #https://nixos.wiki/wiki/Automatic_system_upgrades
 system.autoUpgrade = {
   enable = true;
-  # flake = inputs.self.outPath;
   flake = "github:aidan-gibson/nixos";
   flags = [
     "-L" # print build logs
+    # these would autoupdate to latest, BUT then the lock on the gh repo wouldn't b correct. using github action to auto-gen latest flake lock instead
+    # "--update-input"
+    # "nixpkgs"
   ];
   dates = "02:00";
   randomizedDelaySec = "45min";
