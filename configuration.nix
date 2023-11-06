@@ -12,6 +12,30 @@
     ];
 
 
+
+  environment.systemPackages = with pkgs; [
+    bat
+    btop
+    croc
+    du-dust 
+    duf 
+    eza
+    fd 
+    file 
+    gh 
+    git 
+    htop 
+    iperf
+    python3
+    ripgrep
+    screen
+    tmate
+    tree 
+    wget 
+  ];
+  programs = {
+    zsh.enable = true;
+  }
   nixpkgs.config.allowUnfree = true;
 
   # Use the systemd-boot EFI boot loader.
@@ -101,6 +125,7 @@ users.users.nix = {
 	openssh.authorizedKeys.keys = [
 		"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINphP8B6EmUr/ZKuj0k2XH3WERn2G4kBBkYvGpdB9m5x"
 ];
+  shell = pkgs.zsh;
 };
 
   # Open ports in the firewall.
