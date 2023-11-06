@@ -175,14 +175,14 @@ nix.settings = {
 #https://nixos.wiki/wiki/Automatic_system_upgrades
 system.autoUpgrade = {
   enable = true;
-  flake = inputs.self.outPath;
+  # flake = inputs.self.outPath;
+  flake = "github:aidan-gibson/nixos";
   flags = [
-    "--update-input"
-    "nixpkgs"
     "-L" # print build logs
   ];
   dates = "02:00";
   randomizedDelaySec = "45min";
+  allowReboot = true;
 };
 
   # Open ports in the firewall.
