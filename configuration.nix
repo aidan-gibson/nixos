@@ -11,9 +11,20 @@
       ./hardware-configuration.nix
     ];
 
+  # programs = {
+  #   zsh.enable = true;
+  # };
+
   programs = {
-    zsh.enable = true;
+  zsh = {
+    enable = true;
+    shellAliases = {
+      ll = "ls -al";
+      myalias = "echo 'Hello, NixOS!'";
+      # Add more aliases here as needed
+    };
   };
+};
 
   nixpkgs.config.allowUnfree = true;
 
