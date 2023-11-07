@@ -27,7 +27,8 @@
         tree = "ls --tree";
         reload = "source /etc/zshrc";
         reb = ''sudo nixos-rebuild switch --flake "github:aidan-gibson/nixos" --verbose --fast'';
-        # gc = "nix-store --gc";
+        vers = "nixos-version --json";
+        gc = "nix-store --gc";
       };
     };
   };
