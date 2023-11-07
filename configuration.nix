@@ -4,57 +4,49 @@
 # and in the NixOS manual (accessible by running `nixos-help`).
 
 { config, pkgs, lib, options, inputs, ... }:
+
 # https://nixos.wiki/wiki/Hardware/Apple auto restart
-with lib; 
+with lib;
 
 let
-	register = 
-	{ 
-		"mini_white_intel+nVidia" = "00:03.0 0x7b.b=0x19";
-		"mini_white_intel" = "0:1f.0 0xa4.b=0";
-		"mini_unibody_intel" = "0:3.0 -0x7b=20";
-		"mini_unibody_M1" = "?";
-	};
+  register = {
+    "mini_white_intel+nVidia" = "00:03.0 0x7b.b=0x19";
+    "mini_white_intel" = "0:1f.0 0xa4.b=0";
+    "mini_unibody_intel" = "0:3.0 -0x7b=20";
+    "mini_unibody_M1" = "?";
+  };
 
-in
+in {
+  options.hardware.macVariant = mkOption {
+    type = types.enum (attrNames register);
+    default = elemAt (attrNames register) 0;
+    example = elemAt (attrNames register) 0;
+    description =
+      "Minor hardware variants have different registers for enabling autostart";
+  };
+  # Needs to run every reboot
+  systemd.services.enable-autorestart = {
+    script = ("${pkgs.pciutils}/bin/setpci -s "
+      + (getAttr config.hardware.macVariant register));
+    wantedBy = [ "default.target" ];
+    after = [ "default.target" ];
+  };
+  hardware.macVariant = "mini_unibody_intel";
 
-{
-	options.hardware.macVariant = mkOption {
-		type = types.enum (attrNames register);
-		default = elemAt (attrNames register) 0;
-		example = elemAt (attrNames register) 0;
-		description = "Minor hardware variants have different registers for enabling autostart";
-	};
-
-	# https://www.linuxfromscratch.org/blfs/view/svn/general/pciutils.html
-	config.environment.systemPackages = with pkgs; [ pciutils ];
-
-	# Needs to run every reboot
-	config.systemd.services.enable-autorestart = {
-		script = ("/run/current-system/sw/bin/setpci -s " + (getAttr config.hardware.macVariant register)) ;
-		wantedBy = [ "default.target" ];
-		after = [ "default.target" ]; 
-	};
-{
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
-
-  # programs = {
-  #   zsh.enable = true;
-  # };
+  imports = [ # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
   programs = {
-  zsh = {
-    enable = true;
-    shellAliases = {
-      ll = "ls -al";
-      myalias = "echo 'Hello, NixOS!'";
-      # Add more aliases here as needed
+    zsh = {
+      enable = true;
+      shellAliases = {
+        ll = "ls -al";
+        myalias = "echo 'Hello, NixOS!'";
+        # Add more aliases here as needed
+      };
     };
   };
-};
 
   nixpkgs.config.allowUnfree = true;
 
@@ -62,10 +54,10 @@ in
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-   networking.hostName = "trix"; # Define your hostname.
+  networking.hostName = "trix"; # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-   networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
+  networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
 
   # Set your time zone.
   time.timeZone = "America/Los_Angeles";
@@ -75,7 +67,7 @@ in
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   # Select internationalisation properties.
-   i18n.defaultLocale = "en_US.UTF-8";
+  i18n.defaultLocale = "en_US.UTF-8";
   # console = {
   #   font = "Lat2-Terminus16";
   #   keyMap = "us";
@@ -84,9 +76,6 @@ in
 
   # Enable the X11 windowing system.
   # services.xserver.enable = true;
-
-
-
 
   # Configure keymap in X11
   # services.xserver.layout = "us";
@@ -108,38 +97,38 @@ in
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINphP8B6EmUr/ZKuj0k2XH3WERn2G4kBBkYvGpdB9m5x"
-  ];
+    ];
     shell = pkgs.zsh;
   };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    aria
     bat
     btop
     croc
-    du-dust 
-    duf 
+    du-dust
+    duf
     eza
-    fd 
-    file 
-    gh 
-    git 
-    htop 
+    fd
+    file
+    gh
+    git
+    git
+    htop
+    inetutils
     iperf
+    micro
+    neofetch
+    ookla-speedtest
     python3
     ripgrep
     screen
     tmate
-    tree 
-    wget
-    micro
-    git
-    aria
+    tree
     usbutils
-    inetutils
-    ookla-speedtest
-    neofetch
+    wget
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -153,39 +142,39 @@ in
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
-   services.openssh = {
-	enable = true;
-	settings.PasswordAuthentication = false;
-	settings.KbdInteractiveAuthentication = false;
-	settings.PermitRootLogin = "yes";
-};
+  services.openssh = {
+    enable = true;
+    settings.PasswordAuthentication = false;
+    settings.KbdInteractiveAuthentication = false;
+    settings.PermitRootLogin = "yes";
+  };
 
-nix.settings = {
-  auto-optimise-store = true;
-  experimental-features =
-    [ "ca-derivations" "flakes" "nix-command" "repl-flake" ];
-  keep-derivations = true;
-  keep-outputs = true;
-  trusted-users = [ "@wheel" ];
-  substituters = [ "https://cache.garnix.io" ];
-  trusted-public-keys =
-    [ "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g=" ];
-};
+  nix.settings = {
+    auto-optimise-store = true;
+    experimental-features =
+      [ "ca-derivations" "flakes" "nix-command" "repl-flake" ];
+    keep-derivations = true;
+    keep-outputs = true;
+    trusted-users = [ "@wheel" ];
+    substituters = [ "https://cache.garnix.io" ];
+    trusted-public-keys =
+      [ "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g=" ];
+  };
 
-#https://nixos.wiki/wiki/Automatic_system_upgrades
-system.autoUpgrade = {
-  enable = true;
-  flake = "github:aidan-gibson/nixos";
-  flags = [
-    "-L" # print build logs
-    # these would autoupdate to latest, BUT then the lock on the gh repo wouldn't b correct. using github action to auto-gen latest flake lock instead
-    # "--update-input"
-    # "nixpkgs"
-  ];
-  dates = "02:00";
-  randomizedDelaySec = "45min";
-  allowReboot = true;
-};
+  #https://nixos.wiki/wiki/Automatic_system_upgrades
+  system.autoUpgrade = {
+    enable = true;
+    flake = "github:aidan-gibson/nixos";
+    flags = [
+      "-L" # print build logs
+      # these would autoupdate to latest, BUT then the lock on the gh repo wouldn't b correct. using github action to auto-gen latest flake lock instead
+      # "--update-input"
+      # "nixpkgs"
+    ];
+    dates = "02:00";
+    randomizedDelaySec = "45min";
+    allowReboot = true;
+  };
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
