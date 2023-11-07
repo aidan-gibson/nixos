@@ -8,7 +8,7 @@
 {
   imports = [ # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    ./autorestart.nix
+    # ./autorestart.nix
   ];
 
   programs = {
@@ -151,10 +151,10 @@
     allowReboot = true;
   };
 
-  autoRestart = {
-    enable = false;
-    macVariant = "mini_unibody_intel";
-  };
+  # autoRestart = {
+  #   enable = true;
+  #   macVariant = "mini_unibody_intel";
+  # };
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
