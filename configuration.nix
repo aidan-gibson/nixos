@@ -48,6 +48,14 @@
   #   useXkbConfig = true; # use xkbOptions in tty.
   # };
   services.tailscale.enable = true;
+
+  # The following option (`boot.kernetl.sysctl = ...`) is IN PLACE OF `services.tailscale.useRoutingFeatures = "server'`. See the following bug for details:
+  # https://github.com/NixOS/nixpkgs/issues/209119
+  boot.kernel.sysctl = {
+    "net.ipv4.conf.all.forwarding" = true;
+    "net.ipv6.conf.all.forwarding" = true;
+  };
+
   # Enable the X11 windowing system.
   # services.xserver.enable = true;
 
