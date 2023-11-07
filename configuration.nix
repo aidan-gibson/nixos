@@ -40,7 +40,6 @@
   # boot.loader.efi.canTouchEfiVariables = true;
 
     boot = {
-      kernelPackages = cfg.kernelPackages;
       supportedFilesystems = [ "btrfs" ];
       # https://mynixos.com/nixpkgs/option/boot.initrd.systemd.enable
       # initrd.systemd.enable = true;
