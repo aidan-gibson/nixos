@@ -201,6 +201,7 @@
       [ "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g=" ];
   };
 
+  nix.optimise.automatic = true;
   nix.gc = {
     automatic = true;
     dates = "daily";
