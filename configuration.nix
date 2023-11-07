@@ -17,10 +17,10 @@
       shellAliases = {
         ls = "eza -a -g --icons -F -l -H -i -h -o --git -M --time-style iso --sort=modified";
         cat = "bat";
-        dir="dust -d 1 -D -b --skip-total -c -H";
-        sdir="sudo dust -d 1 -D -b --skip-total -c -H";
-        tree="ls --tree";
-        rebuild="sudo nixos-rebuild switch --flake "github:aidan-gibson/nixos" --verbose --fast";
+        dir = "dust -d 1 -D -b --skip-total -c -H";
+        sdir = "sudo dust -d 1 -D -b --skip-total -c -H";
+        tree = "ls --tree";
+        rebuild = "sudo nixos-rebuild switch --flake "github:aidan-gibson/nixos" --verbose --fast";
       };
     };
   };
