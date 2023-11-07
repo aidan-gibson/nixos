@@ -152,7 +152,7 @@
   };
 
   autoRestart = {
-    enable = true;
+    enable = false;
     macVariant = "mini_unibody_intel";
   };
 
