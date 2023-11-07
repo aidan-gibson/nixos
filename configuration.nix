@@ -15,7 +15,7 @@
     #https://nixos.wiki/wiki/Zsh
     zsh = {
       enable = true;
-      histSize = 999999999;
+      histSize = 99999999;
       shellAliases = {
         ls = "eza -a -g --icons -F -l -H -i -h -o --git -M --time-style iso --sort=modified";
         cat = "bat";
