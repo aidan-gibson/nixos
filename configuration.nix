@@ -201,6 +201,13 @@
       [ "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g=" ];
   };
 
+  nix.gc = {
+    automatic = true;
+    dates = "daily";
+    options = "--delete-older-than 3d";
+    persistent = true;
+  };
+
   #https://nixos.wiki/wiki/Automatic_system_upgrades
   system.autoUpgrade = {
     enable = true;
