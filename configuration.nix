@@ -20,7 +20,7 @@
         dir = "dust -d 1 -D -b --skip-total -c -H";
         sdir = "sudo dust -d 1 -D -b --skip-total -c -H";
         tree = "ls --tree";
-        rebuild = "sudo nixos-rebuild switch --flake "github:aidan-gibson/nixos" --verbose --fast";
+        # rebuild = "sudo nixos-rebuild switch --flake "github:aidan-gibson/nixos" --verbose --fast";
       };
     };
   };
