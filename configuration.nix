@@ -139,9 +139,14 @@
       file
       gh
       git
-      git
+      iproute2
+      iputils
       htop
+      mtr
       inetutils
+      nettools
+      nmap
+      rsync
       iperf
       micro
       neofetch
