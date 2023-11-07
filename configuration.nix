@@ -25,6 +25,7 @@
         dir = "dust -d 1 -D -b --skip-total -c -H";
         sdir = "sudo dust -d 1 -D -b --skip-total -c -H";
         tree = "ls --tree";
+        reload = "source /etc/zshrc";
         reb = "sudo nixos-rebuild switch --flake 'github:aidan-gibson/nixos' --verbose --fast";
         # gc = "nix-store --gc";
       };
