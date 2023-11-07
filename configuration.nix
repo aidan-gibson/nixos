@@ -47,6 +47,9 @@
   #   keyMap = "us";
   #   useXkbConfig = true; # use xkbOptions in tty.
   # };
+
+  programs.mosh.enable = true;
+
   services.tailscale.enable = true;
 
   # The following option (`boot.kernetl.sysctl = ...`) is IN PLACE OF `services.tailscale.useRoutingFeatures = "server'`. See the following bug for details:
@@ -112,6 +115,7 @@
     usbutils
     wget
     pciutils
+    mosh
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
