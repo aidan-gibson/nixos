@@ -8,7 +8,6 @@
 {
   imports = [ # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    ./modules/boot.nix
     # ./autorestart.nix
   ];
 
@@ -40,6 +39,29 @@
   # boot.loader.systemd-boot.enable = true;
   # boot.loader.efi.canTouchEfiVariables = true;
 
+    boot = {
+      kernelPackages = cfg.kernelPackages;
+      supportedFilesystems = [ "btrfs" ];
+      # https://mynixos.com/nixpkgs/option/boot.initrd.systemd.enable
+      # initrd.systemd.enable = true;
+
+      # tmp.useTmpfs = true;
+      kernel.sysctl."kernel.sysrq" = 1;
+      # kernelParams =
+      #   [ "quiet" "rd.udev.log_priority=1" "rd.systemd.show_status=auto" ];
+      # consoleLogLevel = 1;
+    };
+
+    boot.loader = {
+      efi.canTouchEfiVariables = true;
+      timeout = 1;
+    };
+
+    boot.loader.systemd-boot = {
+      enable = true;
+      editor = false;
+      memtest86.enable = true;
+    };
 
   
   networking.hostName = "trix"; # Define your hostname.
