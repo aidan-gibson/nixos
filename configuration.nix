@@ -8,6 +8,7 @@
 {
   imports = [ # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    ./boot.nix
     # ./autorestart.nix
   ];
 
@@ -34,10 +35,13 @@
 
   nixpkgs.config.allowUnfree = true;
 
+  # now in boot.nix
   # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  # boot.loader.systemd-boot.enable = true;
+  # boot.loader.efi.canTouchEfiVariables = true;
 
+
+  
   networking.hostName = "trix"; # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
