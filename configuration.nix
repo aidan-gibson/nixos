@@ -13,7 +13,7 @@
 
   programs = {
     #https://nixos.wiki/wiki/Zsh
-    # /etc/zshrc and /etc/zprofile
+    # /etc/zshrc and /etc/zprofile /etc/zshenv
     zsh = {
       enable = true;
       # TODO
@@ -59,8 +59,6 @@
   # };
 
 
-  services.btrfs.autoScrub.enable = true;
-  services.btrfs.autoScrub.interval = "monthly";
 
   programs.mosh.enable = true;
 
@@ -130,6 +128,8 @@
       usbutils
       wget
       pciutils
+      coreutils
+      smartmontools
       mosh
       ripgrep-all
       tealdeer
@@ -152,6 +152,11 @@
     settings.KbdInteractiveAuthentication = false;
     settings.PermitRootLogin = "yes";
   };
+
+  services.fwupd.enable = true;
+  
+  services.btrfs.autoScrub.enable = true;
+  services.btrfs.autoScrub.interval = "monthly";
 
   nix.settings = {
     auto-optimise-store = true;
