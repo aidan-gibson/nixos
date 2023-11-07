@@ -191,9 +191,10 @@
   nix.settings = {
     auto-optimise-store = true;
     experimental-features =
-      [ "ca-derivations" "flakes" "nix-command" "repl-flake" ];
+      [ "ca-derivations" "flakes" "nix-command" "repl-flake" "auto-allocate-uids" "cgroups" ];
     keep-derivations = true;
     keep-outputs = true;
+    use-cgroups = true;
     trusted-users = [ "@wheel" ];
     substituters = [ "https://cache.garnix.io" ];
     trusted-public-keys =
