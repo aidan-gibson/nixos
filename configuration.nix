@@ -17,8 +17,7 @@
     zsh = {
       enable = true;
       # TODO
-      histSize = 999999999; #doesn't work
-      #initExtra = "HISTSIZE=999999999"; also doesn't work
+      histSize = 999999999;
       shellAliases = {
         ls = "eza -a -g --icons -F -l -H -i -h -o --git -M --time-style iso --sort=modified";
         cat = "bat";
