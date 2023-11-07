@@ -15,8 +15,9 @@
     #https://nixos.wiki/wiki/Zsh
     zsh = {
       enable = true;
+      # TODO
       # histSize = 999999999; doesn't work
-      initExtra = "HISTSIZE=999999999";
+      #initExtra = "HISTSIZE=999999999"; also doesn't work
       shellAliases = {
         ls = "eza -a -g --icons -F -l -H -i -h -o --git -M --time-style iso --sort=modified";
         cat = "bat";
@@ -54,6 +55,10 @@
   #   keyMap = "us";
   #   useXkbConfig = true; # use xkbOptions in tty.
   # };
+
+
+  services.btrfs.autoScrub.enable = true;
+  services.btrfs.autoScrub.interval = "monthly";
 
   programs.mosh.enable = true;
 
