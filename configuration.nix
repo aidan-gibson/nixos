@@ -102,37 +102,39 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    aria
-    bat
-    btop
-    croc
-    du-dust
-    duf
-    eza
-    fd
-    file
-    gh
-    git
-    git
-    htop
-    inetutils
-    iperf
-    micro
-    neofetch
-    ookla-speedtest
-    python3
-    ripgrep
-    screen
-    tmate
-    usbutils
-    wget
-    pciutils
-    mosh
-    ripgrep-all
-    tealdeer
-  ];
-
+  environment = {
+    variables.EDITOR = "micro";
+    systemPackages = with pkgs; [
+      aria
+      bat
+      btop
+      croc
+      du-dust
+      duf
+      eza
+      fd
+      file
+      gh
+      git
+      git
+      htop
+      inetutils
+      iperf
+      micro
+      neofetch
+      ookla-speedtest
+      python3
+      ripgrep
+      screen
+      tmate
+      usbutils
+      wget
+      pciutils
+      mosh
+      ripgrep-all
+      tealdeer
+    ];
+  };
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
