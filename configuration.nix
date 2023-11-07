@@ -103,6 +103,7 @@
     tree
     usbutils
     wget
+    pciutils
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
