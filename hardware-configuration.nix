@@ -15,7 +15,7 @@
   boot.extraModulePackages = [ config.boot.kernelPackages.broadcom_sta ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/8424f6f3-a7af-4b93-8440-51b946b38d22";
+    { device = "/dev/disk/by-uuid/b95b8316-102a-435e-963e-d655e52e78ac";
       fsType = "btrfs";
     };
 
