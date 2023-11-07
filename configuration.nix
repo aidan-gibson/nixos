@@ -179,6 +179,21 @@
   # accidentally delete configuration.nix.
   # system.copySystemConfiguration = true;
 
+  # fails on dirty git trees
+  # system.configurationRevision =
+  #   if inputs.self ? rev then
+  #     inputs.self.rev
+  #   else
+  #     throw "Refusing to build from a dirty Git tree!";
+  
+  # doesn't fail
+  system.configurationRevision =
+    if inputs.self ? rev then
+      inputs.self.rev
+    else
+      "Dirty Git tree";
+
+
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It's perfectly fine and recommended to leave
