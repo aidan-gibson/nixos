@@ -13,15 +13,6 @@
   boot.kernelModules = [ "kvm-intel" "wl" ];
   boot.extraModulePackages = [ config.boot.kernelPackages.broadcom_sta ];
 
-  # fileSystems."/" =
-  #   { device = "/dev/disk/by-uuid/b95b8316-102a-435e-963e-d655e52e78ac";
-  #     fsType = "btrfs";
-  #   };
-
-  # fileSystems."/boot" =
-  #   { device = "/dev/disk/by-uuid/C202-8359";
-  #     fsType = "vfat";
-  #   };
   fileSystems."/" =
     { device = "/dev/disk/by-label/nixos";
       fsType = "btrfs";
