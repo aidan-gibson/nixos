@@ -12,8 +12,10 @@
   ];
 
   programs = {
+    #https://nixos.wiki/wiki/Zsh
     zsh = {
       enable = true;
+      histSize = 999999999;
       shellAliases = {
         ls = "eza -a -g --icons -F -l -H -i -h -o --git -M --time-style iso --sort=modified";
         cat = "bat";
@@ -21,6 +23,7 @@
         sdir = "sudo dust -d 1 -D -b --skip-total -c -H";
         tree = "ls --tree";
         # reb = "sudo nixos-rebuild switch --flake "github:aidan-gibson/nixos" --verbose --fast";
+        # gc = "nix-store --gc";
       };
     };
   };
