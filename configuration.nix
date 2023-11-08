@@ -6,7 +6,8 @@
 { config, pkgs, lib, options, inputs, ... }:
 
 {
-  imports = [ # Include the results of the hardware scan.
+  imports = [
+    # Include the results of the hardware scan.
     ./hardware-configuration.nix
     # ./autorestart.nix
   ];
@@ -39,30 +40,30 @@
   # boot.loader.systemd-boot.enable = true;
   # boot.loader.efi.canTouchEfiVariables = true;
 
-    boot = {
-      supportedFilesystems = [ "btrfs" ];
-      # https://mynixos.com/nixpkgs/option/boot.initrd.systemd.enable
-      # initrd.systemd.enable = true;
+  boot = {
+    supportedFilesystems = [ "btrfs" ];
+    # https://mynixos.com/nixpkgs/option/boot.initrd.systemd.enable
+    # initrd.systemd.enable = true;
 
-      # tmp.useTmpfs = true;
-      kernel.sysctl."kernel.sysrq" = 1;
-      # kernelParams =
-      #   [ "quiet" "rd.udev.log_priority=1" "rd.systemd.show_status=auto" ];
-      # consoleLogLevel = 1;
-    };
+    # tmp.useTmpfs = true;
+    kernel.sysctl."kernel.sysrq" = 1;
+    # kernelParams =
+    #   [ "quiet" "rd.udev.log_priority=1" "rd.systemd.show_status=auto" ];
+    # consoleLogLevel = 1;
+  };
 
-    boot.loader = {
-      efi.canTouchEfiVariables = true;
-      timeout = 1;
-    };
+  boot.loader = {
+    efi.canTouchEfiVariables = true;
+    timeout = 1;
+  };
 
-    boot.loader.systemd-boot = {
-      enable = true;
-      editor = false;
-      memtest86.enable = true;
-    };
+  boot.loader.systemd-boot = {
+    enable = true;
+    editor = false;
+    memtest86.enable = true;
+  };
 
-  
+
   networking.hostName = "trix"; # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -184,7 +185,7 @@
   };
 
   services.fwupd.enable = true;
-  
+
   services.btrfs.autoScrub.enable = true;
   services.btrfs.autoScrub.interval = "monthly";
 
