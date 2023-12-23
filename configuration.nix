@@ -28,21 +28,56 @@
   #   };
   # };
 
-  # power.ups = {
-  #   enable = true;
+  power.ups = {
+    enable = true;
+    maxStartDelay = 45;
+    mode = "netserver";
+    openFirewall = true;
+    # schedulerRules = "/etc/nixos/upssched.conf";
 
-  #   ups."eaton5s700lcd" = {
-  #     driver = "usbhid-ups";
-  #     port = "auto";
-  #   };
 
-  #   users.upsmon = {
-  #     passwordFile = "/etc/upsmonpasssha512";
-  #     upsmon = "master";
-  #   };
+    ups."eaton5s700lcd" = {
+      driver = "usbhid-ups";
+      port = "auto";
+      description = "eaton5s700lcd connected to opn, thinkcentre, ap, trix (this)";
+      # summary is strings concat with \n. it's lines which would be inside ups.conf
+      summary = "";
+      # directives = [""];
+    };
 
-  #   upsmon.monitor."eaton5s700lcd".user = "upsmon";
-  # };
+    upsd = {
+      enable = true;
+      # additional lines to be added to upsd.conf. strings concat w \n.
+      # extraConfig = "";
+      # listen = [
+
+      # ];
+
+    };
+
+    # upsmon powers down the system when powerout
+    upsmon = {
+      enable = true;
+      monitor."eaton5s700lcd" = {
+        user = "upsmon";
+        type = "master";
+        system = "eaton5s700lcd";
+        powerValue = 1;
+        passwordFile = "/etc/upsmonpass";
+
+
+      };
+      # settings 
+
+    };
+    users.upsmon = {
+      passwordFile = "/etc/upsmonpass";
+      instcmds = ["ALL"];
+      # actions = [""];
+      # upsmon = "master";
+    };
+
+  };
 
 
   programs = {
