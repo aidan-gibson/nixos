@@ -17,7 +17,7 @@
     enable = true;
     maxStartDelay = 45;
     mode = "netserver";
-    # openFirewall = true;
+    openFirewall = true;
     # schedulerRules = "/etc/nixos/upssched.conf";
 
 
@@ -293,9 +293,9 @@
 
 
   networking.firewall = {
-    enable = false;
+    enable = true;
     # interfaces."tailscale0".allowedTCPPorts = [ 7878 8989 9696 5055 6767 9117 ];
-    # allowedTCPPorts = [22 3493 7878 8989 9696 5055 6767 9117];
+    allowedTCPPorts = [22 3493 7878 8989 9696 5055 6767 9117];
 
   };
 
