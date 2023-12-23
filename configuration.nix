@@ -3,7 +3,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running `nixos-help`).
 
-{ config, pkgs, lib, options, inputs, ... }:
+{ config, pkgs, lib, options, inputs, power, ... }:
 
 {
   imports = [
@@ -11,6 +11,39 @@
     ./hardware-configuration.nix
     # ./autorestart.nix
   ];
+
+  # power.ups = {
+  #   enable = true;
+  #   mode = "netserver";
+  #   maxStartDelay = 45;
+  #   ups = {
+  #     usbups = {
+  #       driver = "usbhid-ups";
+  #       port = "auto";
+  #       description = "Eaton 5S700LCD USB";
+  #       summary = ''
+  #         override.battery.charge.low = 33
+  #       '';
+  #     };
+  #   };
+  # };
+
+  # power.ups = {
+  #   enable = true;
+
+  #   ups."eaton5s700lcd" = {
+  #     driver = "usbhid-ups";
+  #     port = "auto";
+  #   };
+
+  #   users.upsmon = {
+  #     passwordFile = "/etc/upsmonpasssha512";
+  #     upsmon = "master";
+  #   };
+
+  #   upsmon.monitor."eaton5s700lcd".user = "upsmon";
+  # };
+
 
   programs = {
     #https://nixos.wiki/wiki/Zsh
@@ -39,6 +72,7 @@
   # Use the systemd-boot EFI boot loader.
   # boot.loader.systemd-boot.enable = true;
   # boot.loader.efi.canTouchEfiVariables = true;
+
 
   boot = {
     supportedFilesystems = [ "btrfs" ];
@@ -89,6 +123,8 @@
   programs.mosh.enable = true;
 
   services.tailscale.enable = true;
+
+
 
   # The following option (`boot.kernetl.sysctl = ...`) is IN PLACE OF `services.tailscale.useRoutingFeatures = "server'`. See the following bug for details:
   # https://github.com/NixOS/nixpkgs/issues/209119
