@@ -164,6 +164,7 @@
       mosh
       ripgrep-all
       tealdeer
+      nut
     ];
   };
   # Some programs need SUID wrappers, can be configured further or are
