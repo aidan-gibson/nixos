@@ -188,6 +188,7 @@
       aria
       bat
       btop
+      croc
       du-dust
       duf
       eza
