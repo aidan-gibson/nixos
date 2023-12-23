@@ -61,7 +61,7 @@
     };
     users.upsmon = {
       passwordFile = "/etc/upsmonpass";
-      instcmds = ["ALL"];
+      instcmds = ["all"];
       # actions = [""];
       # upsmon = "master";
     };
@@ -295,7 +295,12 @@
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
-  networking.firewall.enable = false;
+  networking.firewall = {
+    enable = true;
+    interfaces."tailscale0".allowedTCPPorts = [ 7878 8989 9696 5055 6767 9117 ];
+    allowedTCPPorts = [22 3493 7878 8989 9696 5055 6767 9117];
+
+  };
 
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you
