@@ -59,10 +59,10 @@
       # settings 
 
     };
-    users.upsmon = {
+    users.admin = {
       passwordFile = "/etc/upsmonpass";
       instcmds = ["all"];
-      # actions = [""];
+      actions = ["set" "fsd"];
       # upsmon = "master";
     };
 
