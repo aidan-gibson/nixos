@@ -34,9 +34,13 @@
       enable = true;
       # additional lines to be added to upsd.conf. strings concat w \n.
       # extraConfig = "";
-      # listen = [
+      listen = [
+        {
+          address = "127.0.0.1";
+        }
 
-      # ];
+
+      ];
 
     };
 
