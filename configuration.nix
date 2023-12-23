@@ -52,7 +52,7 @@
         type = "master";
         system = "eaton5s700lcd";
         powerValue = 1;
-        passwordFile = /etc/upsmonpass;
+        passwordFile = "/etc/upsmonpass";
 
 
       };
@@ -60,7 +60,7 @@
 
     };
     users.upsmon = {
-      passwordFile = /etc/upsmonpass;
+      passwordFile = "/etc/upsmonpass";
       instcmds = ["ALL"];
       # actions = [""];
       # upsmon = "master";
