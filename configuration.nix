@@ -17,7 +17,7 @@
     enable = true;
     maxStartDelay = 45;
     mode = "netserver";
-    # openFirewall = true;
+    #openFirewall = true;
     # schedulerRules = "/etc/nixos/upssched.conf";
 
 
@@ -52,7 +52,7 @@
         type = "master";
         system = "eaton5s700lcd";
         powerValue = 1;
-        passwordFile = "/etc/upsmonpass";
+        passwordFile = /etc/upsmonpass;
 
 
       };
@@ -60,7 +60,7 @@
 
     };
     users.upsmon = {
-      passwordFile = "/etc/upsmonpass";
+      passwordFile = /etc/upsmonpass;
       instcmds = ["ALL"];
       # actions = [""];
       # upsmon = "master";
