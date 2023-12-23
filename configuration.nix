@@ -17,7 +17,7 @@
     enable = true;
     maxStartDelay = 45;
     mode = "netserver";
-    openFirewall = true;
+    # openFirewall = true;
     # schedulerRules = "/etc/nixos/upssched.conf";
 
 
