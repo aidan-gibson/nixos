@@ -17,7 +17,7 @@
     enable = true;
     maxStartDelay = 45;
     mode = "netserver";
-    openFirewall = true;
+    # openFirewall = true;
     # schedulerRules = "/etc/nixos/upssched.conf";
 
 
@@ -291,14 +291,11 @@
   #   macVariant = "mini_unibody_intel";
   # };
 
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
+
   networking.firewall = {
-    enable = true;
-    interfaces."tailscale0".allowedTCPPorts = [ 7878 8989 9696 5055 6767 9117 ];
-    allowedTCPPorts = [22 3493 7878 8989 9696 5055 6767 9117];
+    enable = false;
+    # interfaces."tailscale0".allowedTCPPorts = [ 7878 8989 9696 5055 6767 9117 ];
+    # allowedTCPPorts = [22 3493 7878 8989 9696 5055 6767 9117];
 
   };
 
