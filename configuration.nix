@@ -12,21 +12,6 @@
     # ./autorestart.nix
   ];
 
-  # power.ups = {
-  #   enable = true;
-  #   mode = "netserver";
-  #   maxStartDelay = 45;
-  #   ups = {
-  #     usbups = {
-  #       driver = "usbhid-ups";
-  #       port = "auto";
-  #       description = "Eaton 5S700LCD USB";
-  #       summary = ''
-  #         override.battery.charge.low = 33
-  #       '';
-  #     };
-  #   };
-  # };
 
   power.ups = {
     enable = true;
